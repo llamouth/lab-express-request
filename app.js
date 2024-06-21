@@ -20,28 +20,17 @@ app.get("/bugs/:bugCount", (req, res) => {
     }
 });
 
-app.get("/pokemon-pretty", (req, res) => {
-    const pokemonString = generatePokemonNameString(pokemon)
-    res.send(pokemonString)
-})
-
-app.get("/pokemon-pretty/:index", (req, res) => {
-    const { index } = req.params;
-    const singlePokemon = pokemon[index];
-    res.send(generatePokemon(singlePokemon))
-})
-
 app.get("/pokemon", (req, res) => {
-    res.send(pokemon)
+    res.json(pokemon)
 })
 
 app.get("/pokemon/search", (req, res) => {
     const { name } = req.query;
     const thePokemon = pokemon.find(poke => poke.name.toLowerCase() === name.toLowerCase())
     if(thePokemon){
-        res.send([thePokemon])
+        res.json([thePokemon])
     }else {
-        res.send([])
+        res.json([])
     }
 })
 
@@ -49,9 +38,24 @@ app.get("/pokemon/:index", (req, res) => {
     const {index} = req.params
     const singlePokemon = pokemon[+index]
     if(singlePokemon) {
-        res.send(singlePokemon)
+        res.json(singlePokemon)
     }else {
-        res.send(`Sorry, no pokemon found at ${index}`)
+        res.json(`Sorry, no pokemon found at ${index}`)
+    }
+})
+
+app.get("/pokemon-pretty", (req, res) => {
+    const pokemonString = generatePokemonNameString(pokemon)
+    res.json(pokemonString)
+})
+
+app.get("/pokemon-pretty/:index", (req, res) => {
+    const { index } = req.params;
+    const singlePokemon = pokemon[index];
+    if(singlePokemon) {
+        res.json(generatePokemon(singlePokemon))
+    }else {
+        res.json(`Sorry, no pokemon found at ${index}`)
     }
 })
 

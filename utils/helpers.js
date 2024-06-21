@@ -1,6 +1,6 @@
 const generatePokemonNameString = (pokemon) => {
     const pokeArray = pokemon.map(poke => poke.name)
-    let resultStr = ""
+    let resultStr = "<h1> Pokemon List </h1> <br>"
     for(let i = 0; i < pokeArray.length; i++){
         if(i === pokeArray.length - 1){
             resultStr += `<a href="/pokemon-pretty/${i}">${pokeArray[i]}</a>`

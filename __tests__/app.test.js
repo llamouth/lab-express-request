@@ -1,7 +1,7 @@
 const request = require("supertest");
 
-const app = require("./app");
-const pokemon = require("./models/pokemon.json");
+const app = require("../server/app");
+const pokemon = require("../models/pokemon.json");
 
 describe("app", () => {
   describe("/", () => {
@@ -24,7 +24,7 @@ describe("app", () => {
     it("sends an error link when too many bugs are requested", async () => {
       const response = await request(app).get(`/bugs/200`);
 
-      expect(response.text).toContain("Too many bugs!! Start over!");
+      expect(response.text).toContain("Too many bugs!! <a href=\"/bugs\">Start over!</a>");
     });
 
     it("sends a 'next' link when a small enough number of bugs is requested", async () => {
